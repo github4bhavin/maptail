@@ -10,7 +10,7 @@ var http = require('http')
   , io = require('socket.io')
   
   , geoip = require('geoip')
-  , cities = new.geoip.City(__dirname + '/GeoLiteCity.dat')
+  , cities = new geoip.City(__dirname + '/GeoLiteCity.dat')
   
   , port = process.argv.length >= 4 && process.argv[4] || process.env.PORT || process.env.POLLA_PORT || 8080
   , host = process.argv.length >= 3 && process.argv[3] || process.env.HOST || process.env.POLLA_HOST || 'localhost'
@@ -213,7 +213,7 @@ tail.stdout.on('data', function (data) {
       //  "area_code":650
       //  }
       if (typeof ips[ip].city === 'undefined') {
-        city = cities.lookupsync( ip) 
+        city = cities.lookupSync( ip) 
         if (city) {
           ips[ip].city = city
           ips[ip].lat = city.latitude
